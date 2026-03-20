@@ -145,3 +145,196 @@ data catalog, and data quality controls.
 We incorporate auditability and compliance checkpoints, ensuring that master data, integration pipelines,
 and analytics data adhere to SAMA and NDMO standards. This ensures that the ODA not only meets business objectives
 but also maintains regulatory compliance, security, and trustworthiness.
+
+# 4. Enterprise Data Modeling Expertise
+
+## 4.1. Modeling methodology
+
+Our standard data modeling methodology follows a layered approach to ensure clarity, consistency,
+and alignment with enterprise architecture principles.
+
+Modeling Standards & Abstraction: We apply conceptual, logical, and physical modeling layers,
+using abstraction principles to separate business concepts from system implementation.
+Naming conventions and metadata standards follow DAMA-DMBOK guidance to ensure consistency, readability, and maintainability.
+
+Modeling Notations:
+
+- ERD – for relational data structures and entity relationships;
+- UML – for system interactions and object modeling;
+- BPMN – for describing business processes.
+
+Tools: We leverage tools that are widely known and mostly freely accessible:
+
+- draw.io as the most flexible tool that integrates well with different OSes, allows to draw different kinds of diagrams and export
+  images of diagrams to common formats. It also allows models to be stored in git repositories as text files.
+- Miro - good for collaborative diagramming.
+- Google sheets as collaborative tool for creating metadata catalogs, high-level data mappings and other
+  documents that require matrix-like structures.
+- Relational database for capturing, cleaning up, tracking changes and generating data catalogs,
+  mapping models from Google sheets;
+- Github/gitlab pages for auto-generating and storing data documentation with version control leveraging
+  the same techniques and git flow as used in software development.
+
+This methodology ensures traceability from business requirements to system implementation,
+supports data governance and quality, provides visual artifacts suitable for both technical and business stakeholders,
+and allows to employ automation in every step aiming to reduce repetitive labour and speed up the process.
+
+## 4.2. Conceptual Data Model (CDM)
+
+We have strong experience in developing business-centric Conceptual Data Models (CDM) that provide a unified,
+technology-agnostic view of enterprise data. Our approach starts with engaging business stakeholders to identify
+and define core entities (e.g., customer, account, transaction, product) and their high-level relationships,
+ensuring alignment with business processes and regulatory requirements.
+
+We then apply the industry-standard and well-proven concepts and approaches for a high-level
+view of the data model for the given industry.
+
+The next step is to integrate the requirements specific to the current platform into the
+industry-standard model, extending it where needed while keeping it clear and consistent.
+
+The CDM is developed using ERD notation at a conceptual level, avoiding technical attributes and focusing on semantics,
+ownership, and relationships across domains.
+
+The resulting model serves as a common business vocabulary and foundation for 
+downstream logical and physical models.
+
+## 4.3 Logical Data Model (LDM)
+
+Our approach to developing a Logical Data Model (LDM) aims at ensuring consistency across all
+data domains (e.g., Customer, Product, Finance, Operations).
+We start by deriving the LDM from the Conceptual Data Model, refining entities into 
+detailed structures with attributes, keys, and relationships.
+
+To ensure normalization and non-redundancy, we apply standard normalization techniques
+(3NF/BCNF where appropriate), eliminate duplicate entities, and enforce clear primary and foreign key relationships.
+We maintain application independence by modeling based on business semantics,
+validated through stakeholder workshops and cross-domain alignment.
+
+Alignment with business requirements is ensured through continuous validation with business owners,
+traceability to processes (e.g., via BPMN), and adherence to best practices from DMBOK.
+
+In case of Data Warehouses (DWH) we are trying to maintain a clean separation of entities between
+data layers according to chosen architecture and trying to align with well-proven methodologies, like Data Vault
+to be able to later create a data integration flow resilient to failures.
+
+This results in a consistent and scalable logical model that serves as the foundation for physical implementation and integration.
+
+## 4.4. Physical Data Model (PDM)
+
+Our approach to developing Physical Data Models (PDM) starts with systematically translating
+the Logical Data Model (LDM) into platform-specific implementations, while preserving business meaning and data integrity.
+We adapt the model based on the target platform—normalized schemas for relational systems,
+denormalized/star schemas for datamarts, creating Data Vault-type entities for Business Layers,
+and define flexible structures for data lakes and staging areas.
+
+Performance and scalability are addressed through indexing strategies, partitioning, clustering,
+and data distribution techniques, as well as optimization for query patterns and workload types (OLTP vs OLAP).
+We also incorporate data lifecycle management, storage optimization, and access patterns to ensure efficient processing at scale.
+
+Throughout the process, we maintain alignment with data governance standards,
+ensuring traceability from LDM to PDM, consistency of definitions,
+support for data quality, security, and regulatory requirements.
+
+## 4.5. Cross-domain Coverage
+
+Our approach to cross-domain integration modeling focuses on establishing a consistent,
+enterprise-wide data foundation across all domains. 
+We identify and define shared entities (e.g., customer, product, counterparty) and model
+them as canonical data structures, ensuring a single, standardized representation used across systems and integrations.
+
+We implement reference data management to standardize key dimensions (e.g., codes, classifications, hierarchies),
+ensuring consistency and interoperability across domains.
+Integration models are designed using canonical schemas and data contracts,
+reducing point-to-point complexity and enabling scalable, reusable data exchange.
+
+This approach is supported by strong metadata management, governance, ensuring consistency,
+traceability, and controlled evolution of shared data assets across the enterprise.
+
+## 4.6. Metadata Management
+
+We ensure that metadata, data lineage, and data definitions are embedded from the very beginning
+directly into data model documentation, data models themselves, and managed as integral components
+of the architecture rather than as separate artifacts. Each entity and attribute in the models
+is supplied with business definitions, ownership, data classification, and quality rules.
+
+We implement end-to-end data lineage by linking conceptual, logical, and physical models to source systems,
+transformations, and target outputs, enabling full traceability from origin to consumption.
+This is supported by integrated metadata repositories and data catalogs like OpenMetadata,
+ensuring synchronization between data models, transformation pipelines, and data layers.
+
+This approach provides consistent definitions, transparency, and auditability, supporting governance,
+regulatory compliance, and impact analysis across the data lifecycle.
+
+## 4.7. Data Domain Coverage
+
+We engage business stakeholders through a structured, domain-driven approach.
+This includes conducting workshops and interviews with domain owners to identify
+key entities, business definitions, data usage patterns and data sources.
+
+Then we define and validate data catalogs (if available) or import metadata from source
+databases into a temporary project database. Google sheets then used to create or update
+metadata, add missing pieces of information, describe business rules. Business users
+are involved in creating and reviewing these descriptions, comments, questions and answers.
+The temporary project database is updated keeping the version history.
+
+At the same time we iteratively define and validate Conceptual Data Models,
+ensuring alignment with processes and regulatory requirements.
+Cross-domain sessions are used to harmonize shared entities and resolve duplicates or inconsistencies.
+
+To ensure completeness, we apply coverage checklists, statuses and traceability to business capabilities and processes.
+This ensures that all domains are consistently modeled, validated, and aligned with business needs.
+
+## 4.8. Data Governance Alignment
+
+We ensure that data models are maintained as living artifacts by embedding them within the data lifecycle
+and change management process. Data Models, when they are created or updated are version-controlled, regularly reviewed
+and documented. Models are updated through formal architecture governance processes
+with change requests (using JIRA or similar system),
+ensuring continuous alignment with evolving business and regulatory requirements.
+
+Data model metadata with text descriptions and other attributes (foreign keys etc.)
+are also stored and updated directly in DBMS or object storage systems (Iceberg tables in Spark).
+As a separate measure of keeping data model descriptions up to date, a separate Data Catalog
+product (Open Metadata) can be used and regularly updated either automatically or by data analysts.
+
+Data models are tightly integrated with data governance frameworks,
+including classification, ownership, lineage, and quality rules. 
+
+This ensures models remain current, auditable, and compliant, while supporting architecture change processes
+and enabling consistent, enterprise-wide data governance.
+
+## 4.9 Meta Modelling Methodology
+
+Our meta-modeling methodology is based on a model-driven engineering approach.
+We define meta-model, that is, the set of rules and standards that we follow for designing actual models,
+that standardizes how all entities, relationships and other architecture artifacts should be structured, related, and governed.
+
+We establish core meta-entities (e.g., entity, attribute, relationship, process, application) and their semantics,
+ensuring consistency across conceptual, logical, and physical models.
+
+We implement the meta-model within the same tools we use for data modeling,
+using standardized templates, naming conventions, and reusable patterns.
+
+The meta-model integrates not only data, but also technology stack and data integration patterns,
+ensuring consistency, traceability and interoperability for different domains and models.
+
+Therefore, this approach enables scalable, consistent, and automated (where possible) modeling,
+supporting governance, compliance, and efficient evolution of the enterprise data architecture.
+
+## 4.10 Industrial Standard Adoption
+
+Our modeling approach is based on industrial standards, namely Banking Financial Services Data Model (FSDM),
+ensuring that all entities, attributes, and relationships align with globally recognized banking semantics
+and regulatory requirements. We leverage the FSDM as a baseline reference model,
+mapping its standard entities (e.g., customer, account, transaction, product) to the bank’s actual data domains.
+Then we extend FSDM where needed, using the specifics of the current project
+while trying to remain as close as possible to the industry standard in order to
+make the system more flexible and receptive to possible updates and developments in future.
+
+This includes:
+
+- Reusing standard entities and relationships from FSDM to avoid reinventing models;
+- Enforcing consistency and naming conventions;
+
+This approach significantly reduces effort and time, ensures alignment with regulatory and industry standards, and produces
+well-auditable models.
