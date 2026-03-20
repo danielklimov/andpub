@@ -338,3 +338,89 @@ This includes:
 
 This approach significantly reduces effort and time, ensures alignment with regulatory and industry standards, and produces
 well-auditable models.
+
+
+## 5.1. Data Integration and Interoperability - Strategic Design
+
+Our integration architecture is based on layered reference models that separate ingestion,
+processing, and consumption, aligned with modern data platform patterns (e.g., lakehouse, delta lake).
+We design integration using a mix of standardized, reusable patterns to ensure scalability, flexibility, and governance.
+
+We have extensive experience implementing:
+
+Batch ETL/ELT for large-scale, scheduled data movement and transformation, optimized for data warehousing and reporting.
+
+We have extensive experience implementing:
+
+Batch ETL/ELT using tools such as Apache Spark, Airflow, dbt for large-scale transformation,
+orchestration, and data warehousing use cases.
+
+Real-time streaming (e.g., Kafka) often combined with Debezium for change data capture (CDC),
+enabling event-driven architectures that are able to perform low-latency processing and
+delivery of data to staging area of a lakehouse. Futher processing is usually orchestrated
+by Airflow.
+
+API connectivity using API gateways and microservices to expose and consume reusable data services
+to/from other components of the system or external systems.
+
+Data virtualization, leveraging engines such as Trino, to enable federated querying across different data sources
+(databases, lakehouse, APIs) without physical data movement. With this setup Trino acts as a broker
+and provides a uniform SQL interface to different types of data sources.
+
+These patterns are selected based on latency requirements, data volume, integration complexity, and business use cases, and are governed through metadata, lineage, and security controls aligned with DAMA-DMBOK. This ensures a robust, scalable, and compliant integration architecture.
+
+## 5.2 Interoperability Strategy and Data Flow Documentation
+
+Interoperability strategy focuses on enabling uniform, governed data exchange patterns across both on-premise and cloud platforms.
+
+We start by defining a semantic layer that standardizes business definitions, shared entities, and data models, ensuring consistent interpretation of data entities across all domains and systems.
+
+To enforce consistency, we seek to use standard data storage formats and exchange protocols,
+decoupling producers and consumers and reducing 
+integration complexity. Data integration is implemented by one of:
+
+- batch ETL/ELT (Spark, Airflow, dbt);
+- real-time streaming (Kafka, Debezium);
+- API services;
+- data virtualization (Trino).
+
+Data flow are documented end-to-end data flows using:
+
+- ERD for data structures;
+- BPMN for process flows.
+
+Semantic layer is defined through the following steps:
+
+- Identifying core business entities and domains;
+- Defining standardized business definitions;
+- Mapping Source Data to Semantic Layer - providing descriptions of source data attributes in terms of business definitions.
+- Formalize the semantic layer - create a Logical Data Model.
+
+Canonical data formats standardize technical structures and data exchange of interoperability. The process
+of managing these in data interoperability involves:
+
+- defining all required data sources;
+- defining of a canonical schemas (meaning interoperable) tables or messages based on semantic layer;
+- creating a mapping of data source entities to the canonical model;
+- defining transformations between source structures and canonical structures (various tools can be used for that, e.g. dbt).
+
+Documentation of End-to-End Data Flow. Steps:
+
+- Collect Source-to-Target mapping information;
+- Identify all data sources: databases, APIs, streaming platforms, SaaS systems, files;
+- Identify data consumers: analytics platforms, dashboards, applications, reports.
+- Record tables, fields, message structures, and file formats.
+- Document ETL/ELT jobs: which fields are extracted, transformed, and loaded.
+- Describe real-time streaming transformations (Kafka topics, CDC events).
+- Describe intermediate steps, tables, views.
+- Draw Data Flow Diagrams (DFDs) showing systems and data movement.
+
+Documentation can be centralized in:
+
+- git repository with a user web-interface like Github or Gitlab;
+- git repository objects can be exported to Confluence pages if Confluence is accepted as a standard document storage in the organization.
+
+Model diagrams can be created using any of the popular packages: Lucidchart, Draw.io, Visio, BizzDesign, Archi, Signavio.
+The the central repository for all documentation concerning dataflow, canonical models and semantic layer is in GitLab or GitHub.
+
+## 5.3. Master Data Management (MDM) Advisory
