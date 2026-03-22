@@ -123,8 +123,12 @@ to specific systems (applications) that will be considered as source of truth in
 
 Next we assess parts of master data that do not have clearly-defined systems that own them.
 For these parts of data we define rules how they can be sourced or calculated, and assign ownership
-or stewardship of them to certain business roles. Sometimes new user interfaces (usually Web UI) must be created for working
-with data or defining with business rules. Sometimes ready-made products (e.g. DBT) can be employed instead.
+or stewardship of them to certain business roles. Sometimes new user interfaces (Web UI) must be created for working
+with data or defining business rules. Sometimes missing data can be sourced
+from spreadsheet-style sources (google sheets, MS Excel files, ods files).
+Sometimes ready-made products (e.g. DBT) can be employed instead to deduce missing attributes from existing attributes.
+In this case the business role that is responsible for these parts of information is also responsible
+for updating respective dbt models.
 
 Finally, we integrate master data into the broader data architecture, supported by:
 - metadata management;
@@ -424,3 +428,118 @@ Model diagrams can be created using any of the popular packages: Lucidchart, Dra
 The the central repository for all documentation concerning dataflow, canonical models and semantic layer is in GitLab or GitHub.
 
 ## 5.3. Master Data Management (MDM) Advisory
+
+Following the strategic design of Master Data architecture,
+we define the MDM roadmap as a phased, business-driven transformation. 
+
+We start by assessing current-state maturity (data quality, duplication, ownership, system landscape),
+then identify priority domains (e.g., Customer, Product).
+
+We then design a target MDM operating model, which is:
+
+- governance (data owners/stewards);
+- golden record definitions;
+- selection of the appropriate MDM style (registry, consolidation, coexistence, centralized).
+
+Based on this, we define implementation phases:
+
+- data standardization;
+- cleansing, matching/merging;
+- integration with upstream/downstream systems.
+
+The roadmap includes tooling enablement, integration patterns, and data quality controls,
+ensuring alignment with governance standards such as DMBOK.
+
+Each phase is designed in such a way that it is linked to measurable outcomes:
+
+- reduction in duplicates;
+- improved data quality KPIs;
+
+Thus, we ensure that each part of the MDM system becomes a trusted foundation for interoperability, analytics,
+and regulatory compliance.
+
+MDM rarely works as a separate product. Rather, it is a combination of:
+
+- Data quality tools (dbt, OpenMetadata, Airflow);
+- Integration tools (dbt, Airflow, Spark, Kafka);
+- Data catalog tools (OpenMetadata);
+- Documentation (Confluence etc.).
+
+## 5.4. Data Quality and Validation
+
+We design automated data quality and validation controls as embedded components of data integration pipelines,
+ensuring data is validated at every stage—from ingestion to consumption.
+We define data quality rules from different perspectives:
+
+- schema validation (data conforms to a predefined structure);
+- completeness (all required attributes are not empty);
+- accuracy (all attributes are correct - i.e. within limits or follow certain rules);
+- consistency (all objects adhere to certain complicated business rules and referenced objects exist);
+- timeliness (all data integration pipelines produce correct results in accordance with expected schedules and those results can be measured).
+- anomaly control (unusual behaviour of objects, unusual trends and patterns).
+
+There are several layers where data quality checks are performed:
+
+- directly within pipelines using tools such as dbt, Apache Spark, custom SQL queries in Airflow DAGs, and Airflow itself
+  is used as a tool to trigger alerts if checks fail.
+- Data Catalog tools (e.g. Open Metadata) are used as a data quality monitoring and rule engine. It can monitor
+  data profiling (e.g., distributions, completeness) as well as track historical trends and failures.
+- Custom dashboards in BI tools, alerts triggered by BI tools.
+
+Checks descriptions and expected results are integrated with metadata, lineage, and governance platform,
+ensuring traceability, auditability, and continuous improvement.
+This approach ensures data is fit for use, reliable, and compliant across all systems.
+
+## 5.5. Security and Compliance (NDMO/NCA)
+
+Our approach embeds security, privacy, and regulatory compliance by design across all data integration and interoperability layers.
+We align with national frameworks such as National Data Management Office (NDMO) and National Cybersecurity Authority (NCA),
+as well as international standards like General Data Protection Regulation and PDPL,
+ensuring consistent enforcement of data protection requirements.
+
+We implement:
+
+- data classification (categorization according to sensitivity and regulatory requirements);
+- encryption (at rest and in transit);
+- masking;
+- tokenization based on sensitivity level, along with role-based and attribute-based access controls (RBAC/ABAC)
+  to restrict data access.
+
+Data localization and residency requirements are enforced through architecture design and cloud controls,
+ensuring regulated data remains within approved jurisdictions.
+
+Within integration pipelines (batch, streaming, APIs, and virtualization), we embed security controls:
+
+- secure APIs;
+- authentication/authorization;
+- audit logging and monitoring, ensuring all data exchanges are traceable and compliant.
+
+Governance is reinforced through metadata, lineage, and policy enforcement, aligned with DMBOK,
+enabling full auditability and regulatory compliance.
+
+This ensures the data architecture is secure, compliant, and resilient, while still enabling requied 
+data access and interoperability across the system.
+
+## 5.6. Use cases support
+
+Our approach ensures that the whole architecture is flexible enough to support multiple use cases:
+
+- analytics;
+- AI usage including ML, various data science models;
+- reporting, dashboarding;
+- be used as web services with secure APIs;
+- output data in different formats to be used by other applications or users in various other use cases.
+
+Our goal is to build data foundation that avoids duplication and silo creation. 
+We centralize data through shared platforms (lakehouse) and expose it via standardized access layers
+such as APIs. In certain cases data virtualization (e.g., Trino) can be used to enable external systems consume
+trusted data without actually creating a separate data silo.
+
+We implement canonical data models - a standard unified view of the entity across multiple systems that store
+data for this entity, ensuring consistency across domains and use cases.
+Integration patterns (batch, streaming, API) are selected based on latency and consumption needs,
+while metadata, lineage, and data quality components ensure that all consumers access reliable and well-governed data.
+
+This approach promotes data reuse, interoperability, and scalability, which
+enabling analytics, AI, and reporting workloads to operate on a single source of truth without
+the need to introduce new silos.
