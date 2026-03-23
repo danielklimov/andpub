@@ -362,7 +362,9 @@ This approach significantly reduces effort and time, ensures alignment with regu
 well-auditable models.
 
 
-## 5.1. Data Integration and Interoperability - Strategic Design
+# 5. Data Integration and Interoperability - Strategic Design
+
+## 5.1 Integration Patterns
 
 Our integration architecture is based on layered reference models that separate ingestion,
 processing, and consumption, aligned with modern data platform patterns (e.g., lakehouse, delta lake).
@@ -391,7 +393,7 @@ and provides a uniform SQL interface to different types of data sources.
 
 These patterns are selected based on latency requirements, data volume, integration complexity, and business use cases, and are governed through metadata, lineage, and security controls aligned with DAMA-DMBOK. This ensures a robust, scalable, and compliant integration architecture.
 
-## 5.2 Interoperability Strategy and Data Flow Documentation
+## 5.1 Interoperability Strategy and Data Flow Documentation
 
 Interoperability strategy focuses on enabling uniform, governed data exchange patterns across both on-premise and cloud platforms.
 
