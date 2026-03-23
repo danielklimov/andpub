@@ -150,6 +150,7 @@ We incorporate auditability and compliance checkpoints, ensuring that master dat
 and analytics data adhere to SAMA and NDMO standards. This ensures that the ODA not only meets business objectives
 but also maintains regulatory compliance, security, and trustworthiness.
 
+
 # 4. Enterprise Data Modeling Expertise
 
 ## 4.1. Modeling methodology
@@ -305,6 +306,24 @@ including classification, ownership, lineage, and quality rules.
 
 This ensures models remain current, auditable, and compliant, while supporting architecture change processes
 and enabling consistent, enterprise-wide data governance.
+
+We have developed a "Data Management Capabilities Assessment Framework" (DCAF) - a methodology developed
+by Andersen Data Practice, that is being continuously used and approved within the company.
+DCAF is used for internal self-assessmant to check the maturity of data delivery, operational readiness
+and the quality of the data governance environment.
+DCAF criteria are data checking patters used in real projects (ETL logs, schemas, reconciliation methods, audit tests).
+
+Workstreams that are executed in DCAF-diagnostics:
+
+- Baseline DWH and BI - architecture, data streams, data sources, bottlenecks;
+- Reconciliations and KPI definitions;
+- DevOps / ETL Reliability;
+- Data Quality and Data Lineage;
+- Controls and auditability - accesses, test environment, evidence pack, data audit and complience;
+- Operating Model and Vendor Dependency - ownership, escalation, roles and responsibilities, the model
+  of interaction with vendors, the plan to reduce dependencies.
+
+
 
 ## 4.9 Meta Modelling Methodology
 
