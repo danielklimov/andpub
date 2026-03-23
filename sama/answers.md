@@ -167,15 +167,14 @@ Modeling Notations:
 - UML – for system interactions and object modeling;
 - BPMN – for describing business processes.
 
-Tools: We leverage tools that are widely known and mostly freely accessible:
+Tools: We leverage tools that are widely known and used in the industry:
 
-- draw.io as the most flexible tool that integrates well with different OSes, allows to draw different kinds of diagrams and export
-  images of diagrams to common formats. It also allows models to be stored in git repositories as text files.
-- Miro - good for collaborative diagramming.
-- Google sheets as collaborative tool for creating metadata catalogs, high-level data mappings and other
-  documents that require matrix-like structures.
-- Relational database for capturing, cleaning up, tracking changes and generating data catalogs,
-  mapping models from Google sheets;
+- BizzDesign as a tool to map business processes, application and technolory;
+- Er/Studio to speed up the creation of ER-Diagrams, schema designs;
+- draw.io as the most flexible tool that allows to draw different kinds of diagrams and export
+  images of diagrams to common formats.
+- Miro - often used for collaborative diagramming.
+- Google sheets as collaborative tool for documenting source data schemas, high-level data mappings.
 - Github/gitlab pages for auto-generating and storing data documentation with version control leveraging
   the same techniques and git flow as used in software development.
 
