@@ -28,6 +28,24 @@ Diagramming and Modeling. We document data architecture using:
 - UML for system interactions, 
 - BPMN for business process flows, and ArchiMate for.
 
+Non-Overlapping Reusable Architecture (NORA): we focus on identifying duplication, overlap,
+and reuse of data assets across domains and systems.
+
+First, we inventory data domains, mapping where key entities (e.g., Customer, Product, Account) are stored and processed.
+We then analyze duplicates, overlaps and redundancies, identifying cases where the same data is:
+
+- replicated;
+- transformed multiple times in a similar way;
+- inconsistently defined across systems.
+
+Next, we assess reuse and interoperability, evaluating whether shared data (e.g., master and reference data)
+is exposed via common services, canonical models, or virtualization layers.
+We review data ownership and governance, ensuring clear domain boundaries and accountability.
+
+Finally, we document findings using data flow diagrams, and data models, highlighting cases with duplication and
+duplicate transformations. This allows us to quantify gaps against NORA principles
+and define actions to reduce redundancy, improve reuse, and enable a more modular and interoperable architecture.
+
 ## 2. Documents and artifacts
 
 The key artifacts and documents usually comprise:
